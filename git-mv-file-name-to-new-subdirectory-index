@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# git mv file name to new subdirectory index.
+#
+# Example: from "foo.md" to "foo/index.md"
+
+while read x; do
+    y=${x%.md}
+    mkdir -p "$y"
+    git mv "$x" "$y/index.md"
+done
