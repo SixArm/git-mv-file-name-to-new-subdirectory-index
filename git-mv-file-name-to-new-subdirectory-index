@@ -3,9 +3,15 @@
 # git mv file name to new subdirectory index.
 #
 # Example: from "foo.md" to "foo/index.md"
-
-while read x; do
-    y=${x%.md}
-    mkdir -p "$y"
-    git mv "$x" "$y/index.md"
+#
+# If the file name is already "index.md" then skip it.
+#
+while read file_name; do
+    file_basename=$(basename "$file_name")
+    if [ "$file_basename" = "index.md" ]; then
+        continue
+    fi
+    dir_name=${file_basename%.md}
+    mkdir -p "$dir_name"
+    git mv "$file_name" "$dir_name/index.md"
 done
