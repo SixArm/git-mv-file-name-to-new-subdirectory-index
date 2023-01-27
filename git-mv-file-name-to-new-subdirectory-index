@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 
 # git mv file name to new subdirectory index.
 #
@@ -6,8 +7,8 @@
 #
 # If the file name is already "index.md" then skip it.
 #
-while read file; do
-    file_basename=$(basename "$file")
+while read -r file_name; do
+    file_basename=$(basename "$file_name")
     if [ "$file_basename" = "index.md" ]; then
         continue
     fi
